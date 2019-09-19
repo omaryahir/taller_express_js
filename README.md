@@ -13,6 +13,8 @@ node index.js
 
 install using:
 npm i -g nodemon 
+export PORT=3000
+
 
 cd express-demo 
 nodemon index.js 
