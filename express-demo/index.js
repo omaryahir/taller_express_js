@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 
+// This enable the use of json in things like req.body.name 
+app.use(express.json());
+
 const courses = [
     {id: 1, name: 'course1'},
     {id: 2, name: 'course2'},
@@ -23,7 +26,18 @@ app.get('/api/courses/:id', (req, res) => {
     res.send(course);
 });
 
-
+app.post('/api/courses', (req, res) => {
+    if (!req.body.name || req.body.name.length < 3) {
+        res.status(400).send('Name is required and should be minimum 3 characters');
+        return;
+    }
+    const course = {
+        id: courses.length + 1,
+        name: req.body.name 
+    };
+    courses.push(course);
+    res.send(course);
+});
 
 
 
